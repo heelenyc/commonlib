@@ -2,11 +2,6 @@ package heelenyc.commonlib.hash;
 
 import java.util.List;
 
-/**
- * @author yicheng
- * @since 2016年4月28日
- * 
- */
 public interface IHashLocator {
 
     /**

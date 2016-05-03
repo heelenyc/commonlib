@@ -5,12 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @className:org.im.core.util.CollectionsUtils.java
- * @description:Collections Utils
- * @author <a href="mailto:sun.xusen@immomo.com">Andy</a>
- * @date 2014-11-21 下午5:56:21
- */
 public class CollectionsUtils {
 	
 

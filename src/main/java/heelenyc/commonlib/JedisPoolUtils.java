@@ -11,11 +11,6 @@ import org.apache.log4j.Logger;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
-/**
- * @author mixueqiang yangjianjun
- * @since Oct 18, 2012
- * 
- */
 public final class JedisPoolUtils {
     private static final Logger logger = Logger.getLogger(JedisPoolUtils.class);
 
