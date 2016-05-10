@@ -12,7 +12,6 @@ import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
-
 public class KetamaHashLocator implements IHashLocator {
     private static Logger logger = Logger.getLogger(KetamaHashLocator.class);
     private static final int NUM_REPS = 160;
@@ -58,7 +57,7 @@ public class KetamaHashLocator implements IHashLocator {
             LogUtils.info(logger, "KetamaHashLocator remove node: {0}, nodes: {1}", node, nodes.toString());
         }
     }
-    
+
     public synchronized void removeNodeIgnoreSize(String node) {
 
         if (nodes.contains(node)) {
@@ -99,9 +98,9 @@ public class KetamaHashLocator implements IHashLocator {
                 }
             }
         }
-        
+
         LogUtils.warn(logger, "KetamaHashLocator nodeMap rebuild: {0} -> {1}", this.ketamaNodes.size(), nodeMap.size());
-        
+
         this.ketamaNodes = nodeMap;
     }
 
@@ -131,18 +130,13 @@ public class KetamaHashLocator implements IHashLocator {
         return nodeMap.get(resultHash);
     }
 
-    @Override
-    public void removeNode(String node, boolean noPing) {
-        // TODO Auto-generated method stub
-        
-    }
-    
     public static void main(String[] args) {
-//        KetamaHashLocator k = new KetamaHashLocator(CollectionsUtils.toList(new String[]{"1"}));
-//        
-//        System.out.println(k.getNodeByKey("123"));
-//        k.removeNodeIgnoreSize("1");
-//        System.out.println(k.getNodeByKey("123"));
+        // KetamaHashLocator k = new
+        // KetamaHashLocator(CollectionsUtils.toList(new String[]{"1"}));
+        //
+        // System.out.println(k.getNodeByKey("123"));
+        // k.removeNodeIgnoreSize("1");
+        // System.out.println(k.getNodeByKey("123"));
     }
 
 }

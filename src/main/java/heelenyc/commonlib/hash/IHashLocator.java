@@ -20,14 +20,6 @@ public interface IHashLocator {
     void removeNode(String node);
 
     /**
-     * 移除节点，不需要ping
-     * 
-     * @param node
-     * @param noPing
-     */
-    void removeNode(String node, boolean noPing);
-
-    /**
      * 更新节点列表。
      */
     void updateNodes(List<String> nodes);
