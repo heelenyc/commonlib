@@ -129,6 +129,16 @@ public class KetamaHashLocator implements IHashLocator {
         }
         return nodeMap.get(resultHash);
     }
+    
+    @Override
+    public int size() {
+        return ketamaNodes.size();
+    }
+
+    @Override
+    public boolean contains(String node) {
+        return ketamaNodes.containsValue(node);
+    }
 
     public static void main(String[] args) {
         // KetamaHashLocator k = new
@@ -138,5 +148,6 @@ public class KetamaHashLocator implements IHashLocator {
         // k.removeNodeIgnoreSize("1");
         // System.out.println(k.getNodeByKey("123"));
     }
+
 
 }

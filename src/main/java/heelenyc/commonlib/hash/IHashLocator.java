@@ -23,5 +23,9 @@ public interface IHashLocator {
      * 更新节点列表。
      */
     void updateNodes(List<String> nodes);
+    
+    int size();
+    
+    boolean contains(String node);
 
 }

@@ -15,6 +15,7 @@ public class ModLocator implements IHashLocator {
     private final ReentrantLock lock = new ReentrantLock();
 
     public ModLocator(List<String> nodes) {
+        // this.availableNodes = new CopyOnWriteArrayList<String>(nodes);
         this.availableNodes = new CopyOnWriteArrayList<String>(nodes);
     }
 
@@ -31,6 +32,9 @@ public class ModLocator implements IHashLocator {
         }
 
         int index = (int) (key % availableNodes.size());
+        // LogUtils.info(logger,
+        // "getNodeByKey key: {0} nodessize : {1} index :{2}", hashKey,
+        // availableNodes.size(), index);
         return availableNodes.get(index);
     }
 
@@ -48,12 +52,13 @@ public class ModLocator implements IHashLocator {
 
                 LogUtils.warn(logger, "Add node: {0} into available nodes: {1} OK.", node, availableNodes);
                 return;
+            } else {
+                LogUtils.warn(logger, "node: {0} already in available nodes: {1}", node, availableNodes);
+                return;
             }
         } finally {
             lock.unlock();
         }
-
-        LogUtils.warn(logger, "Add node: {0} into available nodes: {1} failed!", node, availableNodes);
     }
 
     @Override
@@ -96,6 +101,16 @@ public class ModLocator implements IHashLocator {
     @Override
     public String toString() {
         return "ModLocator [availableNodes=" + availableNodes + "]";
+    }
+
+    @Override
+    public int size() {
+        return availableNodes.size();
+    }
+
+    @Override
+    public boolean contains(String node) {
+        return availableNodes.contains(node);
     }
 
 }
