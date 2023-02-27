@@ -1,16 +1,14 @@
 package heelenyc.commonlib;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.log4j.Logger;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.type.TypeFactory;
-import org.codehaus.jackson.type.TypeReference;
 
 public class JsonUtils {
     private static Logger logger = Logger.getLogger(JsonUtils.class);
@@ -19,7 +17,7 @@ public class JsonUtils {
     private static ThreadLocal<ObjectMapper> objMapperLocal = new ThreadLocal<ObjectMapper>() {
         @Override
         public ObjectMapper initialValue() {
-            return new ObjectMapper().configure(JsonParser.Feature.INTERN_FIELD_NAMES, false);
+            return new ObjectMapper();
         }
     };
 
@@ -49,7 +47,7 @@ public class JsonUtils {
     @SuppressWarnings("rawtypes")
     public static <T> T toT(String jsonString, TypeReference valueTypeRef) {
         try {
-            return objMapperLocal.get().readValue(jsonString, valueTypeRef);
+            return (T) objMapperLocal.get().readValue(jsonString, valueTypeRef);
         } catch (Exception e) {
             LogUtils.error(logger, e, "toT error: {0}", jsonString);
         }
@@ -58,7 +56,7 @@ public class JsonUtils {
 
     public static <T> List<T> toTList(String jsonString, Class<T> clazz) {
         try {
-            return objMapperLocal.get().readValue(jsonString, TypeFactory.collectionType(List.class, clazz));
+            return objMapperLocal.get().readValue(jsonString, List.class);
         } catch (Exception e) {
             LogUtils.error(logger, e, "toTList error: {0}", jsonString);
         }
@@ -73,7 +71,7 @@ public class JsonUtils {
     public static String prettyPrint(Object value) {
         String result = null;
         try {
-            result = objMapperLocal.get().defaultPrettyPrintingWriter().writeValueAsString(value);
+            result = objMapperLocal.get().writerWithDefaultPrettyPrinter().writeValueAsString(value);
         } catch (Exception e) {
             e.printStackTrace();
         }
